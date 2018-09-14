@@ -38,6 +38,12 @@ Do this command to view IP addresses, services URLs, etc.:
 
     $ terraform output -state=$ENV.tfstate
 
+If you are just "messing around", you can destroy everything (clean up) with:
+
+    $ terraform destroy -state=$ENV.tfstate -var-file=variables-$ENV.tfvars
+
+Else, please clone this repo, and commit the *tfstate* files, so that terraform can keep track of the state.
+
 
 ## Resouces
 
