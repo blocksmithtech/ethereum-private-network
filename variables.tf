@@ -2,7 +2,9 @@ variable "env" {}
 
 variable "aws_access_key" {}
 variable "aws_secret_key" {}
-variable "aws_region"     { default = "eu-west-2" }
+
+variable "aws_region"      { default = "eu-west-2" }
+variable "aws_subregion_a" { default = "eu-west-2a" }
 
 variable "key_name"      {}
 variable "key_pair_file" {}

@@ -22,6 +22,10 @@ Then run:
 
 You should also look at `variables.tf` and create a file named `variables-[ENV].tfvars` with the overrides you want.
 
+If it's the first time running terraform: 
+
+    $ terraform init
+
 Then you can check on the infrastructure status with:
 
     $ terraform plan -state=$ENV.tfstate -var-file=variables-$ENV.tfvars
