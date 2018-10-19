@@ -15,3 +15,6 @@ variable "key_pair_file" {}
 ## Linux/Unix, Ubuntu 18.04 - Bionic - 64-bit Amazon Machine Image (AMI)
 variable "instance_ami"  { default = "ami-cc6d8eab" }
 variable "instance_type" { default = "t2.micro" }
+
+# prevent storage of blockchain data from being destroyed
+variable "ethereum_data_prevent_destroy" { default = "false" }

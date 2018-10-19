@@ -87,3 +87,32 @@ resource "aws_security_group" "http" {
     env = "ethereum-node-${var.env}"
   }
 }
+
+resource "aws_security_group" "geth_json_rpc" {
+  name        = "geth-json-rpc"
+  description = "Allow JSON-RPC port for geth"
+
+  ingress {
+    from_port   = 8545
+    to_port     = 8545
+    protocol    = "tcp"
+    cidr_blocks = [
+      "0.0.0.0/0" # anywhere
+    ]
+  }
+
+  egress {
+    from_port   = 8545
+    to_port     = 8545
+    protocol    = "tcp"
+    cidr_blocks = [
+      "0.0.0.0/0" # anywhere
+    ]
+  }
+
+  vpc_id = "${aws_vpc.main.id}"
+
+  tags {
+    env = "ethereum-node-${var.env}"
+  }
+}

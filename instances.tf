@@ -15,7 +15,8 @@ resource "aws_instance" "ethereum-node" {
 
   vpc_security_group_ids = [
     "${aws_security_group.ssh.id}",
-    "${aws_security_group.http.id}"
+    "${aws_security_group.http.id}",
+    "${aws_security_group.geth_json_rpc.id}"
   ]
 
   associate_public_ip_address = true
