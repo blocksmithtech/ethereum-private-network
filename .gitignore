@@ -1,5 +1,5 @@
 .terraform
-.env.*
 *.pem
 *.tfstate
 *.tfstate.backup
+*.tfvars

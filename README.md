@@ -14,13 +14,8 @@ The following need to be available on your machine.
 All commands must be run against a particular environment, e.g. `staging`,
 `production`, `main`, `priv123`...
 
-You should copy the `.env.example.sh` file to `.env.[ENV].sh` and edit to suit your environment. 
+You should copy the `variables-example.tfvars` file to `variables-[ENV].sh` and edit to suit your environment. 
 **Keep these files outside of version control!** - they contain sensitive data.
-Then run:
-
-    $ source .env.[ENV].sh
-
-You should also look at `variables.tf` and create a file named `variables-[ENV].tfvars` with the overrides you want.
 
 At the very least you need to define the *key pair file* that is used for SSH'ing into the EC2 instances. This should be the only *manual* step.
 Go into EC2 dashboard, generate and download the pem file.
@@ -30,6 +25,10 @@ If it's the first time running terraform:
     $ terraform init
 
 ## Usage
+
+To ease the common commants, start by exporting your ENV:
+
+    $ export ENV=my-awesome-env
 
 You can check on the infrastructure status with:
 
