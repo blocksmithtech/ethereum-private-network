@@ -61,11 +61,13 @@ Else, if you intend to use the ethereum node for an extended amount of time,  pl
 
 ## What this does not do
 
-Somethings are not automated for you:
+Somethings are not done for you:
 
 1. automatic start of services after machine reboots
 2. automatic start of services after they crash (geth crashes quite often!)
 3. automatic backups of disks, etc
+4. HTTPS traffic
+5. Authenticated access to "admin" resources such as geth RPC interface
 
 
 ## After provisioning
