@@ -1,6 +1,9 @@
 # Ethereum private network
 
-This repo will help you quickly provision and configure a private ethereum blockchain network on AWS.
+This repo will help you quickly provision and configure an ethereum blockchain network on AWS.
+
+Feel free to copy/clone this repo and adjust for your project.
+By default a node will be created and connected to the test network (Ropsten).
 
 ## Requirements
 
@@ -56,3 +59,34 @@ Else, if you intend to use the ethereum node for an extended amount of time,  pl
 - https://medium.com/coinmonks/ethereum-setting-up-a-private-blockchain-67bbb96cf4f1
 - https://hackernoon.com/heres-how-i-built-a-private-blockchain-network-and-you-can-too-62ca7db556c0
 
+## What this does not do
+
+Somethings are not automated for you:
+
+1. automatic start of services after machine reboots
+2. automatic start of services after they crash (geth crashes quite often!)
+3. automatic backups of disks, etc
+
+
+## After provisioning
+
+To check on ethereum network sync progress, connect to the instance and do:
+
+```
+$ geth attach .ethereum/testnet/geth.ipc
+> net
+> ...
+> eth.syncing
+> ...
+> (eth.syncing.currentBlock / eth.syncing.highestBlock) * 100
+```
+
+To check if JSON RPC interface is responding:
+
+```
+$ curl -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"web3_clientVersion","params":[],"id":"1"}' [instance_ip]:8545
+```
+
+See more:
+- https://github.com/ethereum/go-ethereum/wiki/Managing-your-accounts
+- https://erickhun.com/post/setup-your-ethereum-node--geth-ropsten-test-network/

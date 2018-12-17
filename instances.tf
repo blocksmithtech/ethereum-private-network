@@ -16,10 +16,19 @@ resource "aws_instance" "ethereum-node" {
   vpc_security_group_ids = [
     "${aws_security_group.ssh.id}",
     "${aws_security_group.http.id}",
+    "${aws_security_group.geth_discovery.id}",
     "${aws_security_group.geth_json_rpc.id}"
   ]
 
   associate_public_ip_address = true
+
+  ebs_block_device {
+    device_name           = "/dev/sdg"
+    volume_type           = "gp2"
+    volume_size           = 100 # update 1.geth-block-device.bash if changed
+    delete_on_termination = true
+    # snapshop_id           = ""
+  }
 
   connection {
     user        = "ubuntu"
@@ -29,7 +38,20 @@ resource "aws_instance" "ethereum-node" {
   provisioner "remote-exec" {
     scripts = [
       "./scripts/0.ethereum.bash",
+      "./scripts/1.geth-block-device.bash",
       # "./scripts/9.others.bash",
+    ]
+  }
+
+  provisioner "file" {
+    source      = "./scripts/geth-start.bash"
+    destination = "~/geth-start.bash"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "chmod +x ~/geth-start.bash",
+      "screen -d -m ~/geth-start.bash",
     ]
   }
 }

@@ -116,3 +116,48 @@ resource "aws_security_group" "geth_json_rpc" {
     env = "ethereum-node-${var.env}"
   }
 }
+
+resource "aws_security_group" "geth_discovery" {
+  name        = "geth-discovery"
+  description = "Allow listening/discovery ports for geth"
+
+  ingress {
+    from_port   = 30303
+    to_port     = 30303
+    protocol    = "tcp"
+    cidr_blocks = [
+      "0.0.0.0/0" # anywhere
+    ]
+  }
+  ingress {
+    from_port   = 30303
+    to_port     = 30303
+    protocol    = "udp"
+    cidr_blocks = [
+      "0.0.0.0/0" # anywhere
+    ]
+  }
+
+  egress {
+    from_port   = 30303
+    to_port     = 30303
+    protocol    = "tcp"
+    cidr_blocks = [
+      "0.0.0.0/0" # anywhere
+    ]
+  }
+  egress {
+    from_port   = 30303
+    to_port     = 30303
+    protocol    = "udp"
+    cidr_blocks = [
+      "0.0.0.0/0" # anywhere
+    ]
+  }
+
+  vpc_id = "${aws_vpc.main.id}"
+
+  tags {
+    env = "ethereum-node-${var.env}"
+  }
+}
